@@ -1,0 +1,14 @@
+$acrName = "koyecloud2"
+$acrResourceGroup = "koyecloud2"
+
+az group create -n $acrResourceGroup -l "westeurope"
+
+$acr = az acr create -n $acrName -g $acrResourceGroup --sku Standard | ConvertFrom-Json
+
+az acr login -n $acrName
+
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+dotnet new blazorwasm -o app -n webapp
+
+docker build -t "$acrName.azurecr.io/webapp:1.0" .
+docker push "$acrName.azurecr.io/webapp:1.0"
