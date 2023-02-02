@@ -9,14 +9,14 @@ data "azurerm_key_vault" "keyvault" {
   resource_group_name = var.keyvault_rg
 }
 
-data "azurerm_key_vault_secret" "secret" {
+resource "azurerm_key_vault_secret" "secret" {
   name = var.secret_name
   value = var.secret_value
   key_vault_id = data.azurerm_key_vault.keyvault.id
 
   tags = {
     environment = var.environment
-    managed_by = "terraform"
+    creator = "terraform"
   }
 }
 
