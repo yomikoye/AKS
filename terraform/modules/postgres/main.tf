@@ -36,7 +36,7 @@ resource "azurerm_postgresql_flexible_server_configuration" "main" {
 }
 
 locals {
-  pg_config = {
+  pg_config = var.enable_pgbouncer == true ? {
     "pgbouncer.default_pool_size" : "100"
     "pgBouncer.max_client_conn" : "5000"
     "pgBouncer.pool_mode" : "TRANSACTION"
@@ -44,10 +44,11 @@ locals {
     "pgbouncer.query_wait_timeout" : "120"
     "pgbouncer.server_idle_timeout" : "600"
     "pgbouncer.stats_users" : azurerm_postgresql_flexible_server.main.administrator_login
-  }
+  } : {}
 }
 
 resource "azurerm_postgresql_flexible_server_configuration" "pgbouncer" {
+  count     = var.enable_pgbouncer == true ? 1 : 0
   name      = "pgbouncer.enabled"
   value     = "true"
   server_id = azurerm_postgresql_flexible_server.main.id

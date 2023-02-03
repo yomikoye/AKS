@@ -24,6 +24,11 @@ variable "enable_rbac" {
   default     = false
 }
 
+variable "server_name" {
+  type        = string
+  description = "The name of the PostgreSQL server."
+}
+
 variable "admin_login" {
   type        = string
   description = "The username for the PostgreSQL server."
@@ -33,4 +38,16 @@ variable "admin_login" {
 variable "allowed_cidrs" {
   type        = list(string)
   description = "The list of allowed CIDRs."
+}
+
+variable "postgres_sku_name" {
+  type        = string
+  default     = "B_Standard_B1ms"
+  description = "The SKU name for the PostgreSQL server."
+}
+
+variable "enable_pgbouncer" {
+  type        = bool
+  default     = false
+  description = "set to True to enable pgBouncer."
 }

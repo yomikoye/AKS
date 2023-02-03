@@ -30,13 +30,37 @@ resource "azurerm_key_vault_secret" "postgres" {
 }
 
 module "postgres" {
-  source         = "../../modules/postgres"
-  server_name    = "postgres-${var.environment}-koyecloud"
-  environment    = var.environment
-  rg_name        = azurerm_resource_group.main.name
-  location       = azurerm_resource_group.main.location
-  admin_login    = var.admin_login
-  admin_password = azurerm_key_vault_secret.postgres.value
-  allowed_cidrs = var.allowed_cidrs
+  source           = "../../modules/postgres"
+  server_name      = "${var.server_name}-${var.environment}"
+  environment      = var.environment
+  rg_name          = azurerm_resource_group.main.name
+  location         = azurerm_resource_group.main.location
+  admin_login      = var.admin_login
+  admin_password   = azurerm_key_vault_secret.postgres.value
+  allowed_cidrs    = var.allowed_cidrs
+  sku_name         = var.postgres_sku_name
+  enable_pgbouncer = var.enable_pgbouncer
 }
+
+# module "acr" {
+#   source         = "../../modules/acr"
+#   aks_name       = "aks-${var.environment}-koyecloud"
+#   environment    = var.environment
+#   rg_name        = azurerm_resource_group.main.name
+#   location       = azurerm_resource_group.main.location
+#   admin_login    = var.admin_login
+#   admin_password = azurerm_key_vault_secret.postgres.value
+#   allowed_cidrs  = var.allowed_cidrs
+# }
+
+# module "aks" {
+#   source         = "../../modules/aks"
+#   aks_name       = "aks-${var.environment}-koyecloud"
+#   environment    = var.environment
+#   rg_name        = azurerm_resource_group.main.name
+#   location       = azurerm_resource_group.main.location
+#   admin_login    = var.admin_login
+#   admin_password = azurerm_key_vault_secret.postgres.value
+#   allowed_cidrs  = var.allowed_cidrs
+# }
   

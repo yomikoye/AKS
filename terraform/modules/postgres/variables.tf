@@ -97,4 +97,9 @@ variable "lock_enabled" {
   default     = true
   description = "set to True to lock."
 }
-  
+
+variable "enable_pgbouncer" {
+  type        = bool
+  default     = false
+  description = "set to True to enable pgBouncer."
+}
