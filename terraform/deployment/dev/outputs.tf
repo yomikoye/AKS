@@ -10,7 +10,4 @@ output "postgres_id" {
   value = module.postgres.server_id
 }
 
-output "postgres_database_id" {
-  value = module.postgres.database_id
-}
 

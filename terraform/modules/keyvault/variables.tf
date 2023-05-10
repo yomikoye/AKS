@@ -7,7 +7,7 @@ variable "environment" {
 variable "keyvault_name" {
   type        = string
   description = "Name of the Key Vault"
-  default     = "keyvault-koyecloud"
+  default     = "koyecloud"
 }
 
 variable "rg_location" {
@@ -19,7 +19,7 @@ variable "rg_location" {
 variable "rg_name" {
   type        = string
   description = "Name of the resource group"
-  default     = "rg-dev"
+  default     = "dev"
 }
 
 variable "enable_rbac" {

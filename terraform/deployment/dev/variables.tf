@@ -6,7 +6,7 @@ variable "environment" {
 variable "rg_name" {
   description = "The name of the resource group name"
   type        = string
-  default     = "rg-dev"
+  default     = "dev"
 }
 variable "location" {
   description = "The location of the resource group"
@@ -16,7 +16,7 @@ variable "location" {
 variable "keyvault_name" {
   type        = string
   description = "Name of the Key Vault"
-  default     = "keyvault-koyecloud"
+  default     = "koyecloud"
 }
 variable "enable_rbac" {
   type        = bool
@@ -50,4 +50,9 @@ variable "enable_pgbouncer" {
   type        = bool
   default     = false
   description = "set to True to enable pgBouncer."
+}
+
+variable "acr_name" {
+  description = "value for the nameof the Azure Container Registry"
+  default     = "koyecloud"
 }

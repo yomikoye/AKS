@@ -15,8 +15,8 @@ resource "azurerm_key_vault_secret" "secret" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 
   tags = {
-    environment = var.environment
-    creator = "terraform"
+    Creator = "terraform"
+    Environment = var.environment
   }
 }
 
